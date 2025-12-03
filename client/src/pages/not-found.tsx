@@ -1,21 +1,46 @@
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle } from "lucide-react";
+import { Link } from "wouter";
+import { Home, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gray-50">
-      <Card className="w-full max-w-md mx-4">
-        <CardContent className="pt-6">
-          <div className="flex mb-4 gap-2">
-            <AlertCircle className="h-8 w-8 text-red-500" />
-            <h1 className="text-2xl font-bold text-gray-900">404 Page Not Found</h1>
+    <main className="min-h-screen pt-20 flex items-center justify-center" data-testid="page-not-found">
+      <div className="container mx-auto px-4 text-center">
+        <div className="max-w-md mx-auto">
+          {/* 404 Visual */}
+          <div className="mb-8">
+            <span className="font-serif text-8xl md:text-9xl font-bold text-primary/20">
+              404
+            </span>
           </div>
 
-          <p className="mt-4 text-sm text-gray-600">
-            Did you forget to add the page to the router?
+          <h1 className="font-serif text-2xl md:text-3xl font-semibold mb-4">
+            Page non trouvée
+          </h1>
+          
+          <p className="text-muted-foreground mb-8">
+            Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
           </p>
-        </CardContent>
-      </Card>
-    </div>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link href="/">
+              <Button className="gap-2" data-testid="button-home">
+                <Home className="h-4 w-4" />
+                Retour à l'accueil
+              </Button>
+            </Link>
+            <Button
+              variant="outline"
+              className="gap-2"
+              onClick={() => window.history.back()}
+              data-testid="button-back"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Page précédente
+            </Button>
+          </div>
+        </div>
+      </div>
+    </main>
   );
 }
