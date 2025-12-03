@@ -1,0 +1,119 @@
+Create a production-ready, mobile-first, French-language UI/UX website for a parfumerie and associated product lines using React (Vite) and Redux Toolkit. Style with CSS variables and CSS-in-JS or CSS modules; use Bootstrap only sparingly for simple utilities. Theme: whitesmoke backgrounds, soft pink accents, and high-contrast accessible text. The app must be fully responsive (phones first), accessible, and fast. Include GSAP for smooth scroll and entrance animations and a modern animated initial loader that displays a brand monogram until the SPA is ready. Provide an assets folder (public/assets/) for videos and images and a data seed folder (src/data/) with French product/category content (approx. 25–40 sample items across the specified brands). Implement the following features and behaviors:
+
+Navigation & pages: sticky responsive navbar (Accueil, Produits, Localisation, Contact) with burger menu on mobile and a small overlay search. Routes for home, products (filterable by category/brand), product details modal/page, gallery, about (À propos), localisation (mini map), and contact form.
+
+Hero: modern animated hero with optional video background from assets, animated brand initial/monogram, French tagline, and primary CTA “Découvrir nos parfums”.
+
+Categories & product sections: brand-organized sections rendered in this order (start with ParaSpace): ParaSpace, Parfum, Forever Brand, The Ordinary Brand, Glasses, Avon Brand, maybeLine Brand, Lattfa parfums. Each category block includes a French title, short description and a horizontal, touch-enabled scroller or carousel of product cards.
+
+Product cards & product view: card shows image, nom, prix, court extrait, and rating placeholder. Buttons: “Commander maintenant (WhatsApp)” which opens a prefilled wa.me URL; “Ajouter au panier” updates Redux cart state. Clicking image/title opens a product modal or detail page with full French description and related products.
+
+WhatsApp ordering: floating WhatsApp widget fixed bottom-right that expands in-place to a compact chat UI with an input and send button; sending opens https://wa.me/<NUMBER>?text=<encoded_msg> where <NUMBER> is provided via environment variable. Every product’s “Commander maintenant” uses a prefilled message including product name and ID. Document where to set the WhatsApp number.
+
+Gallery: masonry/lightbox gallery for popular products and magasin interior images.
+
+Localisation: mini map (Google Maps iframe or Leaflet) showing magasin position, address and opening hours.
+
+Contact: French contact form with fields (nom, email, message) and success/error states.
+
+Footer & extras: modern organized footer with links, socials, newsletter subscription, cookie notice (French) and visible Back-to-top button with smooth scroll.
+
+Performance & UX: lazy-load images, responsive images (srcset), placeholder low-res images, code-splitting with React.lazy + Suspense for heavy sections, touch-friendly controls, large tap targets, keyboard navigation, semantic HTML, aria-* attributes, alt text for images, focus trap in modals.
+
+State & architecture: use Redux Toolkit slices for products, cart and UI. Products slice holds items, categories and filter state; cart slice handles items/totals; ui slice manages loader, modal and WhatsApp widget state. Optionally use RTK Query for an API later.
+
+Data & assets: seed src/data/ with French product objects and categories; put all videos/photos in public/assets/ and reference them from data. Provide a small dev admin toggle to change the WhatsApp number at runtime (dev-only).
+
+Developer quality: include linting/formatting (ESLint + Prettier), unit testing (Vitest or Jest) for critical components, and a README with run/build instructions, where to set the WhatsApp number (env), and how to replace assets/data. Include simple CI workflow for build/test.
+
+Deliverables: a ready-to-run Vite React project that includes the described pages/components, Redux setup, GSAP animations, floating WhatsApp widget, seed French content, an assets folder with placeholders, an accessible loader, and clear documentation explaining where to configure the WhatsApp number and basic deployment steps. Keep all UI text in French.
+
+Best file / folder structure (recommended)
+
+Use this structure for clarity, scalability and separation of concerns. I include brief purpose notes for key folders/files.
+
+project-root/
+├─ .github/
+│  └─ workflows/
+│     └─ ci.yml                        # build and test CI pipeline
+├─ public/
+│  ├─ index.html
+│  └─ assets/
+│     ├─ hero/                         # hero videos, webm/mp4 variants
+│     ├─ products/                     # product images (webp, jpg, srcset)
+│     ├─ logos/
+│     └─ gallery/
+├─ src/
+│  ├─ main.jsx                         # app bootstrap (ReactDOM.createRoot)
+│  ├─ App.jsx                          # route layout + global providers
+│  ├─ app/
+│  │  ├─ store.js                      # Redux store setup
+│  │  └─ rootReducer.js (or index)     # root reducer composition
+│  ├─ features/
+│  │  ├─ products/
+│  │  │  ├─ productsSlice.js
+│  │  │  ├─ productsSelectors.js
+│  │  │  └─ productsAPI.js (optional)  # RTK Query endpoints if used
+│  │  ├─ cart/
+│  │  │  ├─ cartSlice.js
+│  │  │  └─ cartSelectors.js
+│  │  └─ ui/
+│  │     ├─ uiSlice.js
+│  │     └─ uiSelectors.js
+│  ├─ components/
+│  │  ├─ layout/
+│  │  │  ├─ Navbar.jsx
+│  │  │  ├─ Footer.jsx
+│  │  │  ├─ Loader.jsx
+│  │  │  └─ BackToTop.jsx
+│  │  ├─ ui/                           # small reusable UI primitives
+│  │  │  ├─ Button.jsx
+│  │  │  ├─ Icon.jsx
+│  │  │  └─ Modal.jsx
+│  │  ├─ products/
+│  │  │  ├─ ProductCard.jsx
+│  │  │  ├─ ProductGrid.jsx
+│  │  │  └─ ProductModal.jsx
+│  │  ├─ categories/
+│  │  │  └─ CategorySection.jsx
+│  │  ├─ gallery/
+│  │  │  └─ Gallery.jsx
+│  │  └─ widgets/
+│  │     └─ WhatsAppWidget.jsx
+│  ├─ pages/
+│  │  ├─ Home.jsx
+│  │  ├─ Products.jsx
+│  │  ├─ ProductDetail.jsx (optional)
+│  │  ├─ GalleryPage.jsx
+│  │  ├─ About.jsx
+│  │  ├─ Location.jsx
+│  │  └─ Contact.jsx
+│  ├─ routes/
+│  │  └─ AppRoutes.jsx                  # react-router route definitions
+│  ├─ data/
+│  │  ├─ products.js                     # seed product data (French)
+│  │  └─ categories.js                   # seed categories/brands (French)
+│  ├─ hooks/
+│  │  ├─ useGSAP.js                      # GSAP reveal hook
+│  │  ├─ useLazyLoadImage.js
+│  │  └─ useLocalStorage.js
+│  ├─ services/
+│  │  └─ analytics.js                    # optional: analytics, helper adapters
+│  ├─ utils/
+│  │  ├─ whatsapp.js                     # function that builds encoded wa.me links
+│  │  └─ format.js                       # price formatting, helpers
+│  ├─ styles/
+│  │  ├─ variables.css                   # --bg, --accent, --text variables
+│  │  ├─ globals.css
+│  │  └─ responsive.css                  # breakpoints, helpers
+│  ├─ types/                             # TypeScript: types/interfaces (if TS)
+│  ├─ tests/
+│  │  ├─ components/
+│  │  └─ features/
+│  └─ utils.env.example                   # example env file
+├─ .env.example
+├─ package.json
+├─ vite.config.js
+├─ README.md
+└─ docs/
+   └─ design-guidelines.md   
