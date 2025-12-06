@@ -111,7 +111,14 @@ export default function Home() {
       </div>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-primary text-primary-foreground">
+      <section className="py-16 md:py-24 text-primary-foreground mt-12 relative isolate">
+        {/* Overlay for better text contrast */}
+        <div className="absolute inset-0 bg-black/50 -z-10" />
+        <img
+          src="/assets/BGS/Wide-Background.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover -z-20"
+        />
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-serif text-3xl md:text-4xl font-semibold mb-4">
             Découvrez l'Excellence

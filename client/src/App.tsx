@@ -1,4 +1,4 @@
-import { useEffect, lazy, Suspense } from "react";
+import { useEffect, lazy, Suspense, useState } from "react"; // Ajout de useState
 import { Switch, Route } from "wouter";
 import { Provider, useSelector, useDispatch } from "react-redux";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -7,10 +7,13 @@ import { store } from "./store";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
+// ⚠️ NOUVEAU : Importez le composant Preloader
+import Preloader from "@/components/layout/Preloader"; // Assurez-vous que le chemin est correct
+
 // Layout components
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { BackToTop } from "@/components/layout/BackToTop";
+// import { BackToTop } from "@/components/layout/BackToTop";
 import { CookieNotice } from "@/components/layout/CookieNotice";
 import { PageLoader } from "@/components/layout/Loader";
 
@@ -18,7 +21,7 @@ import { PageLoader } from "@/components/layout/Loader";
 import { WhatsAppWidget } from "@/components/widgets/WhatsAppWidget";
 import { CartDrawer } from "@/components/widgets/CartDrawer";
 import { ProductModal } from "@/components/products/ProductModal";
-import { DevSettings } from "@/components/widgets/DevSettings";
+// import { DevSettings } from "@/components/widgets/DevSettings";
 
 // Pages - eager load home for fast initial render
 import Home from "@/pages/Home";
@@ -33,6 +36,7 @@ const NotFound = lazy(() => import("@/pages/not-found"));
 
 import { selectTheme, setTheme } from "@/store/uiSlice";
 
+// --- ThemeInitializer reste inchangé ---
 function ThemeInitializer() {
   const dispatch = useDispatch();
   const theme = useSelector(selectTheme);
@@ -49,6 +53,7 @@ function ThemeInitializer() {
   return null;
 }
 
+// --- Router reste inchangé ---
 function Router() {
   return (
     <Suspense fallback={<PageLoader />}>
@@ -65,11 +70,43 @@ function Router() {
   );
 }
 
+// --- AppContent est MODIFIÉ pour gérer le Preloader ---
 function AppContent() {
+  // 1. Contrôle du Preloader
+  const [isAppLoading, setIsAppLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+
+  // 2. Simule le temps de chargement des données initiales
+  useEffect(() => {
+    // ⚠️ REMPLACEZ CETTE LOGIQUE PAR VOS VRAIS APPELS D'API !
+    // Quand toutes vos données sont prêtes, appelez setIsAppLoading(false);
+    const timer = setTimeout(() => {
+      setIsAppLoading(false);
+    }, 2000); // Temps de simulation (2 secondes)
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // 3. Callback après la fin de l'animation GSAP
+  const handlePreloaderFinished = () => {
+    setShowContent(true);
+  };
+
   return (
     <>
+      {/* ⚠️ Affichage conditionnel du Preloader */}
+      <Preloader 
+        loading={isAppLoading} 
+        onLoaded={handlePreloaderFinished} 
+      />
+
       <ThemeInitializer />
-      <div className="flex flex-col min-h-screen">
+      
+      {/* 4. Le contenu de l'application est masqué jusqu'à ce que l'animation du Preloader soit terminée */}
+      <div 
+        className="flex flex-col min-h-screen"
+        style={{ opacity: showContent ? 1 : 0, transition: 'opacity 0.5s ease-in' }}
+      >
         <Navbar />
         <div className="flex-1">
           <Router />
@@ -77,18 +114,19 @@ function AppContent() {
         <Footer />
       </div>
 
-      {/* Overlays and Widgets */}
+      {/* Overlays and Widgets (Peut être rendu même si le contenu principal est masqué) */}
       <WhatsAppWidget />
       <CartDrawer />
       <ProductModal />
-      <BackToTop />
+      {/* <BackToTop /> */}
       <CookieNotice />
-      <DevSettings />
+      {/* <DevSettings /> */}
       <Toaster />
     </>
   );
 }
 
+// --- App reste inchangé ---
 function App() {
   return (
     <Provider store={store}>

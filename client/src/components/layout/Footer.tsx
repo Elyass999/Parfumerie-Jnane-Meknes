@@ -19,15 +19,14 @@ const footerLinks = {
     { href: "/cgv", label: "CGV" },
   ],
   contact: [
-    { icon: MapPin, text: "123 Rue de la Parfumerie, 75001 Paris" },
-    { icon: Phone, text: "+33 1 23 45 67 89" },
-    { icon: Mail, text: "contact@parfumerie-elegance.fr" },
+    { icon: MapPin, text: "MAG 2 LOT JNANE MEKNES 2 MERJANE SEKNA A COTÉ DE HAMAM EL WAFAE,VILLE MEKNÈS" },
+    { icon: Phone, text: "+212619470601" },
+    { icon: Mail, text: "contact@Parfumerie_Jnane_Meknes.ma" },
   ],
   social: [
-    { icon: Facebook, href: "https://facebook.com", label: "Facebook" },
-    { icon: Instagram, href: "https://instagram.com", label: "Instagram" },
-    { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
-    { icon: SiWhatsapp, href: "https://wa.me/33123456789", label: "WhatsApp" },
+    { icon: Facebook, href: "https://facebook.com/parfumerie_jnane_meknes/", label: "Facebook" },
+    { icon: Instagram, href: "https://www.instagram.com/parfumerie_jnane_meknes/", label: "Instagram" },
+    { icon: SiWhatsapp, href: "https://wa.me/+212619470601", label: "WhatsApp" },
   ],
 };
 
@@ -62,22 +61,21 @@ export function Footer() {
           <div className="lg:col-span-2">
             <Link href="/">
               <a className="inline-flex items-center gap-2 mb-4">
-                <span className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-xl">
-                  P
-                </span>
+              <img src="/assets/logos/Main_Logo.jpg" alt="Logo" className="h-8 w-auto rounded-full" />
+
                 <span className="font-serif text-2xl font-semibold">
-                  Parfumerie Élégance
+                  Parfumerie Jnane Meknes
                 </span>
               </a>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-md">
-              Votre destination beauté depuis 2010. Découvrez notre sélection
+              Votre destination beauté. Découvrez notre sélection
               exclusive de parfums et cosmétiques de luxe.
             </p>
 
             {/* Newsletter Form */}
             <div className="max-w-md">
-              <h4 className="font-semibold mb-3">Newsletter</h4>
+              <h4 className="font-semibold mb-3">Inscriver Vous !</h4>
               <p className="text-sm text-muted-foreground mb-4">
                 Inscrivez-vous pour recevoir nos offres exclusives et nouveautés.
               </p>
@@ -166,7 +164,7 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Parfumerie Élégance. Tous droits réservés.
+              © {new Date().getFullYear()} Parfumerie Jnane Meknes. Tous droits réservés.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               {footerLinks.legal.map((link) => (

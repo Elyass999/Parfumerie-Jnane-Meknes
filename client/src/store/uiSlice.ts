@@ -29,7 +29,7 @@ const getWhatsAppNumber = (): string => {
   if (envNumber) return envNumber;
   
   const savedNumber = localStorage.getItem("dev-whatsapp-number");
-  return savedNumber || "33600000000"; // Default French number
+  return savedNumber || "+212619470601"; // Default French number
 };
 
 const initialState: UIState = {

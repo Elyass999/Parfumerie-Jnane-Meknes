@@ -9,19 +9,16 @@ import { selectWhatsAppNumber } from "@/store/uiSlice";
 import { buildWhatsAppUrl, openWhatsApp } from "@/lib/whatsapp";
 
 const storeInfo = {
-  address: "123 Rue de la Parfumerie",
-  city: "75001 Paris, France",
-  phone: "+33 1 23 45 67 89",
-  email: "contact@parfumerie-elegance.fr",
+  address: "MAG 2 LOT JNANE MEKNES 2 MERJANE SEKNA A COTÉ DE HAMAM EL WAFAE,VILLE MEKNÈS",
+  city: "MEKNÈS",
+  phone: "+212619470601",
+  email: "contact@Parfumerie_Jnane_Meknes.ma",
   hours: [
-    { day: "Lundi - Vendredi", hours: "9h00 - 19h00" },
-    { day: "Samedi", hours: "10h00 - 18h00" },
-    { day: "Dimanche", hours: "Fermé" },
+    { day: "Lundi - Jeudi", hours: "10h00 - 23h00" },
+    { day: "Vendredi", hours: "16h00 - 23h00" },
+    { day: "Samedi - Dimanche", hours: "10h00 - 23h00" },
   ],
-  coordinates: {
-    lat: 48.8606,
-    lng: 2.3376,
-  },
+
 };
 
 export default function Location() {
@@ -46,10 +43,10 @@ export default function Location() {
     return () => ctx.revert();
   }, []);
 
+
   const handleGetDirections = () => {
-    const { lat, lng } = storeInfo.coordinates;
     window.open(
-      `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`,
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.015576515947!2d-5.570470324321721!3d33.86652757322748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda05b005a733eed%3A0x7870e0a1a5a82235!2sParfumerie%20jnane%20meknes!5e1!3m2!1sen!2sma!4v1765020164404!5m2!1sen!2sma" ,
       "_blank"
     );
   };
@@ -68,7 +65,7 @@ export default function Location() {
         {/* Header */}
         <div data-animate className="text-center mb-12">
           <h1 className="font-serif text-3xl md:text-4xl font-semibold mb-4">
-            Notre Boutique
+            Notre Boutique Localisation
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Rendez-nous visite pour découvrir notre collection complète et
@@ -83,7 +80,7 @@ export default function Location() {
               <div className="w-full h-full bg-muted relative">
                 {/* Google Maps Embed */}
                 <iframe
-                  src={`https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937604!2d${storeInfo.coordinates.lng}!3d${storeInfo.coordinates.lat}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDjCsDUxJzM4LjIiTiAywrAyMCcxNS40IkU!5e0!3m2!1sfr!2sfr!4v1600000000000!5m2!1sfr!2sfr`}
+                  src={"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3287.015576515947!2d-5.570470324321721!3d33.86652757322748!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda05b005a733eed%3A0x7870e0a1a5a82235!2sParfumerie%20jnane%20meknes!5e1!3m2!1sen!2sma!4v1765020164404!5m2!1sen!2sma"}
                   width="100%"
                   height="100%"
                   style={{ border: 0, minHeight: "400px" }}
@@ -200,20 +197,7 @@ export default function Location() {
           </div>
         </div>
 
-        {/* Additional Info */}
-        <div data-animate className="mt-12 text-center">
-          <Card className="inline-block">
-            <CardContent className="p-6">
-              <p className="text-muted-foreground">
-                <strong>Parking:</strong> Parking public disponible à 50m de la
-                boutique
-                <br />
-                <strong>Métro:</strong> Ligne 1 - Station Louvre-Rivoli (5 min à
-                pied)
-              </p>
-            </CardContent>
-          </Card>
-        </div>
+
       </div>
     </main>
   );

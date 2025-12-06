@@ -80,7 +80,6 @@ export const selectFilteredProducts = (state: RootState): Product[] => {
       (p) =>
         p.name.toLowerCase().includes(query) ||
         p.description.toLowerCase().includes(query) ||
-        p.shortDescription?.toLowerCase().includes(query) ||
         p.tags?.some((tag) => tag.toLowerCase().includes(query))
     );
   }

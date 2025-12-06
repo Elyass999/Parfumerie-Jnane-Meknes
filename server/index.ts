@@ -39,8 +39,11 @@ app.use((req, res, next) => {
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
   const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
+  // capture JSON responses for logging
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  res.json = function (bodyJson: any, ...args: any[]) {
     capturedJsonResponse = bodyJson;
+    // @ts-expect-error preserve original signature
     return originalResJson.apply(res, [bodyJson, ...args]);
   };
 
@@ -49,7 +52,11 @@ app.use((req, res, next) => {
     if (path.startsWith("/api")) {
       let logLine = `${req.method} ${path} ${res.statusCode} in ${duration}ms`;
       if (capturedJsonResponse) {
-        logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+        try {
+          logLine += ` :: ${JSON.stringify(capturedJsonResponse)}`;
+        } catch {
+          logLine += " :: [unserializable response]";
+        }
       }
 
       log(logLine);
@@ -85,14 +92,24 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || "5000", 10);
-  httpServer.listen(
-    {
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    },
-    () => {
-      log(`serving on port ${port}`);
-    },
-  );
+
+  // Build listen options, but avoid reusePort on Windows (win32)
+  const listenOpts: any = {
+    port,
+    host: "0.0.0.0",
+  };
+
+  if (process.platform !== "win32") {
+    // SO_REUSEPORT is useful on Unix-like systems for load-balancing multiple processes,
+    // but Windows often does not support it (ENOTSUP). Enable it only where supported.
+    listenOpts.reusePort = true;
+  } else {
+    // When developing on Windows, binding only to localhost is sometimes safer.
+    // If you prefer, uncomment the following line to bind to 127.0.0.1 instead:
+    // listenOpts.host = "127.0.0.1";
+  }
+
+  httpServer.listen(listenOpts, () => {
+    log(`serving on port ${port}`);
+  });
 })();

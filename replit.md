@@ -189,3 +189,4 @@ Expected endpoints:
 - `POST /api/contact` - Submit contact form
 - `POST /api/newsletter` - Subscribe to newsletter
 - `GET/POST /api/cart` - Cart operations
+<!-- http://localhost:5000 -->

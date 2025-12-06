@@ -12,6 +12,7 @@ import { toggleMenu, closeMenu, selectIsMenuOpen, toggleSearch, closeSearch, sel
 import { selectCartItemCount, openCart } from "@/store/cartSlice";
 import { setSearchQuery } from "@/store/productsSlice";
 
+
 const navLinks = [
   { href: "/", label: "Accueil" },
   { href: "/produits", label: "Produits" },
@@ -70,10 +71,8 @@ export function Navbar() {
               className="font-serif text-xl md:text-2xl font-semibold tracking-tight text-foreground flex items-center gap-2"
               data-testid="link-logo"
             >
-              <span className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold text-lg">
-                P
-              </span>
-              <span className="hidden sm:inline">Parfumerie</span>
+              <img src="/assets/logos/Main_Logo.jpg" alt="Logo" className="h-8 w-auto rounded-full" />
+              <span className="hidden sm:inline">Parfumerie Jnane Meknes</span>
             </a>
           </Link>
 
@@ -136,7 +135,7 @@ export function Navbar() {
               <ShoppingBag className="h-5 w-5" />
               {cartItemCount > 0 && (
                 <Badge
-                  className="absolute -top-1 -right-1 h-5 w-5 p-0 flex items-center justify-center text-xs"
+                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center text-xs rounded-full"
                   data-testid="badge-cart-count"
                 >
                   {cartItemCount}

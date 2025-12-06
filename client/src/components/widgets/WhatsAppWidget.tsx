@@ -72,7 +72,7 @@ export function WhatsAppWidget() {
                 </div>
                 <div>
                   <CardTitle className="text-base font-medium">
-                    Parfumerie Élégance
+                    Parfumerie Jnane Meknes
                   </CardTitle>
                   <p className="text-xs text-white/80">En ligne</p>
                 </div>

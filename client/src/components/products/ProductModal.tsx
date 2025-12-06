@@ -13,7 +13,7 @@ import {
 } from "@/store/uiSlice";
 import { addToCart } from "@/store/cartSlice";
 import { selectProductsByCategory, selectCategoryById } from "@/store/productsSlice";
-import { formatPrice, orderProductViaWhatsApp } from "@/lib/whatsapp";
+import {  orderProductViaWhatsApp } from "@/lib/whatsapp";
 import { useToast } from "@/hooks/use-toast";
 import { ProductCard } from "./ProductCard";
 import { useState } from "react";
@@ -186,11 +186,11 @@ export function ProductModal() {
                     className="text-3xl font-bold text-primary"
                     data-testid="text-modal-price"
                   >
-                    {formatPrice(product.price)}
+                    {(product.price)} MAD
                   </span>
                   {hasDiscount && (
                     <span className="text-lg text-muted-foreground line-through">
-                      {formatPrice(product.originalPrice!)}
+                      {(product.originalPrice!)}
                     </span>
                   )}
                 </div>

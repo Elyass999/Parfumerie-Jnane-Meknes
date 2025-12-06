@@ -47,7 +47,7 @@ export default function Contact() {
   });
 
   useEffect(() => {
-    document.title = "Contact - Parfumerie Élégance";
+    document.title = "Contact - Parfumerie Jnane Meknes";
   }, []);
 
   useEffect(() => {
@@ -119,11 +119,11 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold mb-1">Téléphone</h3>
                     <a
-                      href="tel:+33123456789"
+                      href="tel:+212619470601"
                       className="text-muted-foreground hover:text-primary transition-colors"
                       data-testid="link-contact-phone"
                     >
-                      +33 1 23 45 67 89
+                      +212619470601
                     </a>
                   </div>
                 </div>
@@ -143,7 +143,7 @@ export default function Contact() {
                       className="text-muted-foreground hover:text-primary transition-colors break-all"
                       data-testid="link-contact-email"
                     >
-                      contact@parfumerie-elegance.fr
+                      contact@Parfumerie_Jnane_Meknes.ma
                     </a>
                   </div>
                 </div>
@@ -159,9 +159,7 @@ export default function Contact() {
                   <div>
                     <h3 className="font-semibold mb-1">Adresse</h3>
                     <p className="text-muted-foreground">
-                      123 Rue de la Parfumerie
-                      <br />
-                      75001 Paris, France
+                        MAG 2 LOT JNANE MEKNES 2 MERJANE SEKNA A COTÉ DE HAMAM EL WAFAE,VILLE MEKNÈS
                     </p>
                   </div>
                 </div>

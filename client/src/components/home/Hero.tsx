@@ -75,14 +75,15 @@ export function Hero() {
       data-testid="hero-section"
     >
       {/* Background with gradient overlay */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-background to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(var(--primary-rgb),0.15),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(var(--primary-rgb),0.1),transparent_50%)]" />
-        
-        {/* Decorative elements */}
-        <div className="absolute top-1/4 left-10 w-64 h-64 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-10 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
+      <div>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          src="/assets/Videos/Background_Video_Jnan.mp4"
+        />
       </div>
 
       {/* Content */}
@@ -92,12 +93,14 @@ export function Hero() {
       >
         {/* Animated Monogram */}
         <div
-          className="hero-monogram mx-auto mb-8 w-24 h-24 md:w-32 md:h-32 rounded-full bg-primary flex items-center justify-center shadow-2xl shadow-primary/30"
+          className="hero-monogram flex items-center justify-center mb-8"
           data-testid="hero-monogram"
         >
-          <span className="font-serif text-4xl md:text-5xl font-bold text-primary-foreground">
-            P
-          </span>
+          <img
+            src="/assets/logos/Main_Logo.jpg"
+            alt="Logo"
+            className="h-32 w-auto rounded-full shadow-2xl shadow-primary/30"
+          />
         </div>
 
         {/* Tagline */}
@@ -105,7 +108,7 @@ export function Hero() {
           data-hero-animate
           className="text-sm md:text-base uppercase tracking-[0.3em] text-primary mb-4"
         >
-          Parfumerie de luxe
+          Parfumerie Jnane Meknes
         </p>
 
         {/* Main Heading */}

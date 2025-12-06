@@ -116,13 +116,7 @@ export function ProductCard({ product, showQuickView = true }: ProductCardProps)
           {product.name}
         </h3>
 
-        {/* Short Description */}
-        <p
-          className="text-xs text-muted-foreground line-clamp-2 mb-3"
-          data-testid={`text-product-desc-${product.id}`}
-        >
-          {product.shortDescription}
-        </p>
+
 
         {/* Price */}
         <div className="flex items-baseline gap-2 mb-4">
@@ -130,13 +124,9 @@ export function ProductCard({ product, showQuickView = true }: ProductCardProps)
             className="text-lg font-bold text-primary"
             data-testid={`text-price-${product.id}`}
           >
-            {formatPrice(product.price)}
+            {(product.price)} MAD
           </span>
-          {hasDiscount && (
-            <span className="text-sm text-muted-foreground line-through">
-              {formatPrice(product.originalPrice!)}
-            </span>
-          )}
+  
         </div>
 
         {/* Action Buttons */}
