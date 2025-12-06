@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
-  base:process.env.VITE_BASE_PATH || "/Parfumerie-Jnane-Meknes",
+  base:process.env.VITE_BASE_PATH || "/parfumerie-jnane-meknes",
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
