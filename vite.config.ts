@@ -1,4 +1,3 @@
-// vite.config.js
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
@@ -10,7 +9,9 @@ const __dirname = path.dirname(__filename);
 
 export default defineConfig({
   plugins: [react()],
-  base:process.env.VITE_BASE_PATH || "/parfumerie-jnane-meknes",
+
+  base: process.env.VITE_BASE_PATH || "/", // safe default
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "client", "src"),
@@ -18,19 +19,33 @@ export default defineConfig({
       "@assets": path.resolve(__dirname, "attached_assets"),
     },
   },
-  // ensure Vite root is the client folder (so .vite and optimizeDeps go there)
+
+  // Vite will treat "client/" as root
   root: path.resolve(__dirname, "client"),
+
   build: {
     outDir: path.resolve(__dirname, "dist/public"),
     emptyOutDir: true,
+
+    // avoid big-chunk warnings
+    chunkSizeWarningLimit: 1500,
+
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("react")) return "vendor-react";
+            return "vendor";
+          }
+        }
+      }
+    }
   },
+
   server: {
     port: 5173,
     strictPort: true,
     host: true,
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
-    },
-  },
+    fs: { strict: true, deny: ["**/.*"] },
+  }
 });
